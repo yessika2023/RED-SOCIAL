@@ -1,0 +1,392 @@
+<html><head><base href="http://localhost:8081/" />
+    <title>UNEXCA - Red Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    :root {
+    --primary-color: #1877f2;
+    --secondary-color: #0d5dc4;
+    --hover-color: #e7f3ff;
+    --bg-color: #f0f2f5;
+    --text-color: #1c1e21;
+    --post-bg: white;
+    --nav-bg: white;
+    --border-color: rgba(24, 119, 242, 0.1);
+    }
+    
+    [data-theme="dark"] {
+    --primary-color: #2e89ff;
+    --secondary-color: #1877f2;
+    --hover-color: #263951;
+    --bg-color: #18191a;
+    --text-color: #e4e6eb;
+    --post-bg: #242526;
+    --nav-bg: #242526;
+    --border-color: #3e4042;
+    }
+    
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+    }
+    
+    .navbar {
+    background: var(--nav-bg);
+    padding: 8px 16px;
+    box-shadow: 0 2px 4px rgba(24, 119, 242, 0.2);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--primary-color);
+    transition: background-color 0.3s ease;
+    }
+    
+    .theme-toggle {
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 16px;
+    }
+    
+    .logo {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    }
+    
+    .search-bar {
+    background: var(--bg-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    width: 240px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    color: var(--text-color);
+    }
+    
+    .search-bar:focus {
+    box-shadow: 0 0 0 2px var(--hover-color);
+    }
+    
+    .main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 80px 16px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+    
+    .sidebar {
+    position: sticky;
+    top: 80px;
+    }
+    
+    .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 4px;
+    color: var(--text-color);
+    }
+    
+    .menu-item:hover {
+    background: var(--hover-color);
+    }
+    
+    .menu-item svg {
+    margin-right: 10px;
+    fill: var(--primary-color);
+    }
+    
+    .post {
+    background: var(--post-bg);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(24, 119, 242, 0.2);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+    }
+    
+    .post:hover {
+    box-shadow: 0 2px 8px rgba(24, 119, 242, 0.2);
+    }
+    
+    .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    }
+    
+    .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-right: 12px;
+    }
+    
+    .create-post {
+    background: var(--post-bg);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(24, 119, 242, 0.2);
+    }
+    
+    .post-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    outline: none;
+    padding: 12px;
+    border-radius: 20px;
+    background: var(--bg-color);
+    margin-bottom: 12px;
+    color: var(--text-color);
+    }
+    
+    .contacts {
+    background: var(--post-bg);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    }
+    
+    .contact {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+    }
+    
+    .contact:hover {
+    background: var(--hover-color);
+    }
+    
+    .nav-actions {
+    display: flex;
+    align-items: center;
+    }
+    
+    .nav-actions svg {
+    color: var(--primary-color);
+    }
+    
+    </style>
+    </head>
+    <body>
+    
+    <nav class="navbar">
+    <a href="https://unexca.edu.ve" class="logo">UNEXCA</a>
+    <input type="text" class="search-bar" placeholder="Buscar en UNEXCA...">
+    <div class="nav-actions">
+        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
+        <path d="M14 2.042c6.76 0 12 4.952 12 11.64S20.76 25.322 14 25.322a13.091 13.091 0 0 1-3.474-.461.956 .956 0 0 0-.641.047L7.5 25.959a.961.961 0 0 1-1.348-.849l-.065-2.134a.957.957 0 0 0-.322-.684A11.389 11.389 0 0 1 2 13.682C2 6.994 7.24 2.042 14 2.042ZM6.794 17.086a.57.57 0 0 0 .827.758l3.786-2.874a.722.722 0 0 1 .868 0l2.8 2.1a1.8 1.8 0 0 0 2.6-.481l3.525-5.592a.57.57 0 0 0-.827-.758l-3.786 2.874a.722.722 0 0 1-.868 0l-2.8-2.1a1.8 1.8 0 0 0-2.6.481Z"></path>
+        </svg>
+        <button class="theme-toggle">Cambiar tema</button>
+    </div>
+    </nav>
+    
+    <div class="main-container">
+    <!-- El resto del contenido permanece igual -->
+    <div class="sidebar">
+        <div class="menu-item">
+        <svg viewBox="0 0 28 28" width="28" height="28">
+            <path d="M17.5 23.979 21.25 23.979C21.386 23.979 21.5 23.864 21.5 23.729L21.5 13.979C21.5 13.427 21.949 12.979 22.5 12.979L24.33 12.979 14.017 4.046 3.672 12.979 5.5 12.979C6.052 12.979 6.5 13.427 6.5 13.979L6.5 23.729C6.5 23.864 6.615 23.979 6.75 23.979L10.5 23.979 10.5 17.729C10.5 17.04 11.061 16.479 11.75 16.479L16.25 16.479C16.939 16.479 17.5 17.04 17.5 17.729L17.5 23.979ZM21.25 25.479 17 25.479C16.448 25.479 16 25.031 16 24.479L16 17.729C16 17.594 15.886 17.479 15.75 17.479L12.25 17.479C12.114 17.479 12 17.594 12 17.729L12 24.479C12 25.031 11.552 25.479 11 25.479L6.75 25.479C5.784 25.479 5 24.695 5 23.729L5 14.479 3.069 14.479C2.567 14.479 2.079 14.215 1.868 13.759 1.63 13.245 1.757 12.658 2.175 12.29L13.001 2.912C13.248 2.675 13.608 2.527 13.989 2.521 14.392 2.527 14.753 2.675 15.027 2.937L25.821 12.286C25.823 12.288 25.824 12.289 25.825 12.29 26.244 12.658 26.371 13.245 26.133 13.759 25.921 14.215 25.434 14.479 24.931 14.479L23 14.479 23 23.729C23 24.695 22.217 25.479 21.25 25.479Z"></path>
+        </svg>
+        Inicio
+    </div>
+    <div class="menu-item">
+        <svg viewBox="0 0 28 28" width="28" height="28">
+        <path d="M7.847 23.488C9.207 23.488 11.443 23.363 14.467 22.806 13.944 24.228 12.581 25.247 10.98 25.247 9.649 25.247 8.483 24.542 7.825 23.488L7.847 23.488ZM24.923 15.73C25.17 17.002 24.278 18.127 22.27 19.076 21.17 19.595 18.724 20.583 14.684 21.369 11.568 21.974 9.285 22.113 7.848 22.113 7.421 22.113 7.068 22.101 6.79 22.085 4.574 21.958 3.324 21.248 3.077 19.976 2.702 18.049 3.295 17.305 4.278 16.073L4.537 15.748C5.2 14.907 5.459 14.081 5.035 11.902 4.086 7.022 6.284 3.687 11.064 2.753 15.846 1.83 19.134 4.096 20.083 8.977 20.506 11.156 21.056 11.824 21.986 12.355L22.348 12.561C23.72 13.335 24.548 13.802 24.923 15.73Z"></path>
+        </svg>
+        Notificaciones
+    </div>
+    <div class="menu-item">
+        <svg viewBox="0 0 28 28" width="28" height="28">
+        <path d="M23.5 9.5H10.25a.75.75 0 00-.75.75v7c0 .414.336.75.75.75H17v5.5H4.5v-19h19v5zm0 14h-5v-6.25a.75.75 0 00-.75-.75H11V11h12.5v12.5zm1.5.25V4.25C25 3.561 24.439 3 23.75 3H4.25C3.561 3 3 3.561 3 4.25v19.5c0 .689.561 1.25 1.25 1.25h19.5c.689 0 1.25-.561 1.25-1.25z"></path>
+        </svg>
+        Grupos
+    </div>
+    </div>
+
+
+    
+    <main>
+        <!-- El contenido principal permanece igual -->
+        <div class="create-post">
+            
+        
+        
+        
+        <input type="text" class="post-input" placeholder="¿Qué estás pensando?">
+        <div class="post-actions">
+            <div class="action-button">📷 Foto/Video</div>
+            <div class="action-button">😊 Sentimiento</div>
+            <div class="action-button">📍 Ubicación</div>
+        </div>
+        </div>
+    
+        <div class="post">
+            <div class="post-header">
+            <div class="profile-pic"></div>
+            <div>
+                <strong>Profesor García</strong>
+                <div style="color: #65676b; font-size: 0.9em;">Hace 2 horas</div>
+            </div>
+            </div>
+            <p>¡Recordatorio! Mañana tenemos evaluación de Programación Web 📚</p>
+            <div class="post-actions">
+            <div class="action-button">👍 Me gusta</div>
+            <div class="action-button">💭 Comentar</div>
+            <div class="action-button">↗️ Compartir</div>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+            <div class="profile-pic"></div>
+            <div>
+                <strong>Estudiante Martínez</strong>
+                <div style="color: #65676b; font-size: 0.9em;">Hace 5 horas</div>
+            </div>
+            </div>
+            <p>¿Alguien tiene los apuntes de la clase de hoy? 📝</p>
+            <div class="post-actions">
+            <div class="action-button">👍 Me gusta</div>
+            <div class="action-button">💭 Comentar</div>
+            <div class="action-button">↗️ Compartir</div>
+            </div>
+        </div>
+        </main>
+        <div class="sidebar">
+        <div class="contacts">
+            <h3>Contactos</h3>
+            <div class="contact">
+            <div class="profile-pic"></div>
+            <div>Prof. Martínez</div>
+            </div>
+            <div class="contact">
+            <div class="profile-pic"></div>
+            <div>Est. López</div>
+            </div>
+            <div class="contact">
+            <div class="profile-pic"></div>
+            <div>Est. Sánchez</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+        
+
+
+        <!-- Los contactos permanecen igual -->
+        </div>
+    </div>
+    </div>
+    
+    <script>
+    // Manejador del tema oscuro
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    
+    themeToggle.addEventListener('click', () => {
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeToggle.textContent = 'Modo oscuro';
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = 'Modo claro';
+    }
+    });
+    
+    // El resto del JavaScript permanece igual
+    document.querySelectorAll('.action-button').forEach(button => {
+    button.addEventListener('click', function() {
+        if(this.textContent.includes('Me gusta')) {
+        this.style.color = '#1877f2';
+        this.style.fontWeight = 'bold';
+        }
+    });
+    });
+    
+    document.querySelector('.post-input').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter' && this.value.trim() !== '') {
+        const newPost = document.createElement('div');
+        newPost.className = 'post';
+        newPost.innerHTML = `
+        <div class="post-header">
+            <div class="profile-pic"></div>
+            <div>
+            <strong>Tú</strong>
+            <div style="color: #65676b; font-size: 0.9em;">Ahora mismo</div>
+            </div>
+        </div>
+        <p>${this.value}</p>
+        <div class="post-actions">
+            <div class="action-button">👍 Me gusta</div>
+            <div class="action-button">💭 Comentar</div>
+            <div class="action-button">↗️ Compartir</div>
+        </div>
+        `;
+        
+        document.querySelector('.create-post').after(newPost);
+        this.value = '';
+        
+        newPost.querySelectorAll('.action-button').forEach(button => {
+        button.addEventListener('click', function() {
+            if(this.textContent.includes('Me gusta')) {
+            this.style.color = '#1877f2';
+            this.style.fontWeight = 'bold';
+            }
+        });
+        });
+    }
+    });
+    </script>
+    
+    </body>
+
+</div>
+</div>
+</div>
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+</div>
+</div>
+</div>
+<footer style="background-color: #f0f2f5; padding: 10px; text-align: center; border-top: 1px solid #e0e0e0;">
+    <p style="margin: 0; color: #1c1e21;">
+        &copy; 2024 YESSIKA ESTUVO AQUI. Todos los derechos reservados.
+    </p>
+    </footer>
+
+
+
+
+    </html>
