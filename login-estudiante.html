@@ -1,0 +1,347 @@
+<html><head><base href="https://unexca.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNEXCA - Login Estudiantes de Informática</title>
+    <style>
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    :root {
+        --bg-primary: #ffffff;
+        --text-primary: #333;
+        --input-border: #ddd;
+        --btn-bg: #1a2a6c;
+        --btn-hover: #2a3a7c;
+    }
+    
+    [data-theme="dark"] {
+        --bg-primary: #1a1a1a;
+        --text-primary: #ffffff;
+        --input-border: #444;
+        --btn-bg: #2a3a7c;
+        --btn-hover: #3a4a8c;
+    }
+    
+    .page-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .info-section {
+        color: white;
+        max-width: 400px;
+        animation: slideIn 0.8s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .info-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .info-section p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        color: #e0e0e0;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        background: #0a192f;
+        padding: 20px;
+    }
+    
+    .background-elements {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+    }
+    
+    .code-rain {
+        position: absolute;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 14px;
+        animation: rain 20s linear infinite;
+    }
+    
+    @keyframes rain {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(100vh); }
+    }
+    
+    .login-container {
+        background: var(--bg-primary);
+        padding: 1.5rem; 
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        width: 90%; 
+        max-width: 350px; 
+        animation: fadeIn 0.5s ease-in-out;
+        position: relative;
+    }
+    
+    .theme-toggle {
+        position: absolute;
+        top: 15px; 
+        right: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: auto;
+        padding: 0;
+    }
+    
+    .theme-toggle svg {
+        width: 20px; 
+        height: 20px;
+        fill: var(--text-primary);
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .logo-container {
+        text-align: center;
+        margin-bottom: 1.5rem; 
+    }
+    
+    .logo {
+        width: 120px; 
+        height: 120px;
+    }
+    
+    h1 {
+        color: var(--text-primary);
+        text-align: center;
+        margin-bottom: 1rem; 
+        font-size: 1.5rem; 
+    }
+    
+    .form-group {
+        margin-bottom: 1rem; 
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 0.4rem; 
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 0.9rem; 
+    }
+    
+    input {
+        width: 100%;
+        padding: 0.7rem; 
+        border: 2px solid var(--input-border);
+        border-radius: 8px;
+        font-size: 0.9rem; 
+        transition: border-color 0.3s ease;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    
+    input:focus {
+        outline: none;
+        border-color: var(--btn-bg);
+    }
+    
+    button {
+        width: 100%;
+        padding: 0.8rem; 
+        background: var(--btn-bg);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem; 
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    button:hover {
+        background: var(--btn-hover);
+    }
+    
+    .forgot-password {
+        text-align: center;
+        margin-top: 0.8rem; 
+        margin-bottom: 0.8rem; 
+        font-size: 0.8rem; 
+    }
+    
+    .forgot-password a, .register-link a {
+        color: var(--btn-bg);
+        text-decoration: none;
+    }
+    
+    .forgot-password a:hover, .register-link a:hover {
+        text-decoration: underline;
+    }
+    
+    .register-link {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .divider {
+        width: 80%;
+        height: 1px;
+        background: var(--input-border);
+        margin: 0.5rem auto;
+    }
+    
+    .error-message {
+        color: #b21f1f;
+        text-align: center;
+        margin-top: 0.8rem; 
+        display: none;
+        font-size: 0.8rem; 
+    }
+    </style>
+    </head>
+    <body>
+        <div class="background-elements"></div>
+        <div class="page-container">
+            <div class="info-section">
+                <h2> UNEXCA: RED LEANDER</h2>
+                <p>Aqui podras encontrar contenido especifico para los estudiantes de informatica del turno nocturno.</p>
+                <p>BD, proyecto, programacion, proyecto web, redes, seguridad, arquitectura, cableado y mas.</p>
+            </div>
+            <div class="login-container">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <svg viewBox="0 0 24 24" class="theme-icon">
+                        <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75zM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0zM12 21.75a.75.75 0 0 1-.75-.75v-2.25a.75.75 0 0 1 1.5 0V21a.75.75 0 0 1-.75.75zM3 12.75a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 0 1.5H3zM21 12.75a.75.75 0 0 1 0-1.5h-2.25a.75.75 0 0 1 0 1.5H21z"/>
+                    </svg>
+                </button>
+                <div class="logo-container">
+                    <svg class="logo" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="90" fill="#1a2a6c"/>
+                        <text x="100" y="85" text-anchor="middle" fill="white" font-size="24">UNEXCA</text>
+                        <text x="100" y="115" text-anchor="middle" fill="white" font-size="16">Informática</text>
+                        <path d="M50,130 C50,130 100,150 150,130" stroke="white" fill="none" stroke-width="3"/>
+                    </svg>
+                </div>
+                <h1>Portal Estudiantil</h1>
+                <form id="loginForm" onsubmit="return handleLogin(event)">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Estudiante</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ingrese su nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required placeholder="Ingrese su contraseña">
+                    </div>
+                    <button type="submit">Iniciar Sesión</button>
+                </form>
+                <div class="forgot-password">
+                    <a href="https://unexca.com/recuperar-password">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div class="divider"></div>
+                <div class="register-link">
+                    <a href="https://unexca.com/registro">¿No tienes una cuenta? Regístrate aquí</a>
+                </div>
+                <div id="errorMessage" class="error-message">
+                    Credenciales incorrectas. Por favor, intente nuevamente.
+                </div>
+            </div>
+        </div>
+    
+    <script>
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+        
+        if (nombre.length >= 3 && password.length >= 6) {
+            errorMessage.style.display = 'none';
+            window.location.href = "https://unexca.com/dashboard";
+        } else {
+            errorMessage.style.display = 'block';
+            errorMessage.style.animation = 'fadeIn 0.3s ease-in-out';
+        }
+        
+        return false;
+    }
+    
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'translateY(-5px)';
+            this.parentElement.style.transition = 'transform 0.3s ease';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'translateY(0)';
+        });
+    });
+    
+    function toggleTheme() {
+        const body = document.documentElement;
+        if (body.hasAttribute('data-theme')) {
+            body.removeAttribute('data-theme');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+        }
+    }
+    
+    function createCodeRain() {
+        const container = document.querySelector('.background-elements');
+        const characters = '01>';
+        const numberOfElements = 50;
+    
+        for (let i = 0; i < numberOfElements; i++) {
+            const element = document.createElement('div');
+            element.className = 'code-rain';
+            element.style.left = `${Math.random() * 100}vw`;
+            element.style.animationDelay = `${Math.random() * 20}s`;
+            element.textContent = characters[Math.floor(Math.random() * characters.length)];
+            container.appendChild(element);
+        }
+    }
+    
+    createCodeRain();
+    </script>
+    </body></html>

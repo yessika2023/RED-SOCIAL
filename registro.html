@@ -1,0 +1,314 @@
+<html><head><base href="/" />
+    <title>Registro Estudiantil - Informática</title>
+    <style>
+        :root {
+            --primary-color: #1b4b1a;  
+            --secondary-color: #1b4b1a;
+            --text-color: #333;
+            --bg-color: #ffffff;
+            --input-bg: #ffffff;
+            --input-border: #e1e1e1;
+        }
+    
+        .dark-mode {
+            --primary-color: #1b4b1a;  
+            --secondary-color: #4a8c4d;
+            --text-color: #ffffff;
+            --bg-color: #1a1a1a;
+            --input-bg: #2d2d2d;
+            --input-border: #404040;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0.15; 
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0.05; 
+            }
+        }
+    
+        .matrix-character {
+            position: fixed;
+            color: #0F0;
+            font-family: monospace;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 0;
+            text-shadow: 0 0 5px #0F0;
+            animation: matrixFall 20s linear infinite; 
+            opacity: 0.15; 
+        }
+    
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a192f;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+        }
+    
+        .container {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(26, 27, 75, 0.3);
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+            margin: auto;
+        }
+    
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+    
+        .form-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+    
+        .form-header p {
+            font-size: 0.9rem;
+        }
+    
+        .form-header svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0.8rem;
+        }
+    
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+    
+        input, select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+            color: var(--text-color);
+        }
+    
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+    
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-color);
+            color: #ffffff;  
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+    
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+    
+        .success-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-color);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: var(--text-color);
+        }
+    
+        .shake {
+            animation: shake 0.5s linear;
+        }
+    
+        .theme-toggle {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 35px;
+            height: 35px;
+        }
+    
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .form-header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <button class="theme-toggle" id="themeToggle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text-color)">
+                    <path d="M20 8.69V4h-4.69L12 0.69 8.69 4H4v4.69L0.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                </svg>
+            </button>
+    
+            <div class="form-header">
+                <svg viewBox="0 0 24 24" fill="var(--primary-color)">
+                    <path d="M9.4 16.6L4.8 12l-1.4 1.4 6 6 12-12-1.4-1.4L9.4 16.6z"/>
+                </svg>
+                <h1>Registro Estudiantil Informática</h1>
+                <p>Complete el formulario para registrarse</p>
+            </div>
+    
+            <form id="registroForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="fechaNacimiento" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <select id="genero" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                        <option value="prefiero-no-decir">Prefiero no decir</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" required>
+                </div>
+    
+                <button type="submit">Registrarse</button>
+            </form>
+    
+            <div class="success-message">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--primary-color)">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                <h2>¡Registro Exitoso!</h2>
+                <p>Tus datos han sido registrados correctamente.</p>
+            </div>
+        </div>
+    
+        <script>
+            const themeToggle = document.getElementById('themeToggle');
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.parentElement.classList.toggle('dark-mode');
+            });
+    
+            function createMatrixCharacter() {
+                const characters = "日ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ012345789:・.=*+-<>¦｜╌";
+                const char = document.createElement('div');
+                char.className = 'matrix-character';
+                char.style.left = Math.random() * window.innerWidth + 'px';
+                char.textContent = characters[Math.floor(Math.random() * characters.length)];
+                document.body.appendChild(char);
+    
+                char.addEventListener('animationend', () => {
+                    char.remove();
+                });
+            }
+    
+            setInterval(createMatrixCharacter, 500); 
+    
+            document.getElementById('registroForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nombre = document.getElementById('nombre').value;
+                const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+                const genero = document.getElementById('genero').value;
+                const email = document.getElementById('email').value;
+                const usuario = document.getElementById('usuario').value;
+    
+                if (!nombre || !fechaNacimiento || !genero || !email || !usuario) {
+                    this.classList.add('shake');
+                    setTimeout(() => this.classList.remove('shake'), 500);
+                    return;
+                }
+    
+                console.log({
+                    nombre,
+                    fechaNacimiento,
+                    genero,
+                    email,
+                    usuario
+                });
+    
+                const successMessage = document.querySelector('.success-message');
+                successMessage.style.display = 'flex';
+    
+                setTimeout(() => {
+                    this.reset();
+                    successMessage.style.display = 'none';
+                }, 3000);
+            });
+    
+            document.getElementById('email').addEventListener('input', function(e) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(this.value)) {
+                    this.style.borderColor = '#ff4444';
+                } else {
+                    this.style.borderColor = 'var(--primary-color)';
+                }
+            });
+        </script>
+    </body></html>
