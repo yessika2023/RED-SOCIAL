@@ -235,6 +235,11 @@
                     <label for="usuario">Usuario</label>
                     <input type="text" id="usuario" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="añodeingreso">Año de ingreso</label>
+                    <input type="date" id="añodeingreso" required>
+                </div>
     
                 <button type="submit">Registrarse</button>
             </form>
@@ -278,8 +283,9 @@
                 const genero = document.getElementById('genero').value;
                 const email = document.getElementById('email').value;
                 const usuario = document.getElementById('usuario').value;
+                const añodeingreso = document.getElementById('añodeingreso').value;
     
-                if (!nombre || !fechaNacimiento || !genero || !email || !usuario) {
+                if (!nombre || !fechaNacimiento || !genero || !email || !usuario  || !añodeingreso || ) {
                     this.classList.add('shake');
                     setTimeout(() => this.classList.remove('shake'), 500);
                     return;
@@ -290,7 +296,8 @@
                     fechaNacimiento,
                     genero,
                     email,
-                    usuario
+                    usuario,
+                    añodeingreso,
                 });
     
                 const successMessage = document.querySelector('.success-message');
